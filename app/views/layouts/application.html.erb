@@ -1,15 +1,21 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <title>AirbnbClone</title>
-    <%= csrf_meta_tags %>
-    <%= csp_meta_tag %>
+    <html>
+        <head>
+            <title><%= yield(:title) %>| Airbnb-Clone</title>
+            <title>AirbnbClone</title>
+            <%= csrf_meta_tags %>
+            <%= csp_meta_tag %>
 
-    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
-  </head>
-
-  <body>
-    <%= yield %>
-  </body>
-</html>
+            <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.9.0/css/all.min.css" integrity="sha256-UzFD2WYH2U1dQpKDjjZK72VtPeWP50NoJjd26rnAdUI=" crossorigin="anonymous" />
+            <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+        </head>
+        <body>
+            <div class="container">
+                    <%= render 'layouts/header' %>
+                    <div class="mt-5">
+                    </div>
+                <%= yield %>
+            </div>
+        </body>
+    </html>
