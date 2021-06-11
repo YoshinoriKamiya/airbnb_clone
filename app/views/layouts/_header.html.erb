@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-md fixed-top bg-light">
     <div class="body">
-        <a class="navbar-brand text-dark" href="#">y-airbnb</a>
+        <strong><%= link_to "y-airbnb",root_path,class:"nav-link text-dark" %></strong>
     </div>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
@@ -11,13 +11,36 @@
             <li class="nav-item">
                 <a class="btn btn-outline-success" href="/rooms/new">Become a host</a>
             </li>
-            <li class="nav-item ">
-                <%= link_to "Login","" ,class:"nav-link text-muted" %>
-            </li>
-            <li class="nav-item ">
-                <%= link_to "Sign up","",class:"nav-link text-muted"%>
-            </li>
-        </div>
+            <% if user_signed_in? %>
+                <li class="nav-item dropdown">
+                    <a href="#" class="nav-link dropdown-toggle text-white" data-toggle="dropdown">
+                        <%= current_user.name %><b class="caret"></b>
+                    </a>
+                    <li class="nav-item ">
+                        <%= link_to "Manage Listring","",class:"nav-link text-muted" %>
+                    </li>
+                    <li class="nav-item ">
+                        <%= link_to "Lisst Your Space","",class:"nav-link text-muted" %>
+                    </li>
+                    <li class="nav-item ">
+                        <%= link_to "Your Reservations","",class:"nav-link text-muted" %>
+                    </li>
+                    <hr>
+                    <li class="nav-item ">
+                        <%= link_to "Edit Profile","",class:"nav-link text-muted" %>
+                    </li>
+                    <li class="nav-item ">
+                        <%= link_to "Log Out","",class:"nav-link text-muted" %>
+                    </li>
+                </li>
+            <% else %>
+                    <li class="nav-item ">
+                        <%= link_to "Login",new_user_session_path ,class:"nav-link text-muted" %>
+                    </li>
+                    <li class="nav-item ">
+                        <%= link_to "Sign up",new_user_registration_path,class:"nav-link text-muted"%>
+                    </li>
+            <% end %>
     </div>
 </nav>
            
