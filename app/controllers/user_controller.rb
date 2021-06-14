@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   before_action :correct_user, only: [:edit, :update]
-  before_action :only_loggedin_users, only: [:edit, :update]
+  before_action :only_loggedin_users, only: [:edit, :update,:destroy]
   def new
     @user = User.new
   end
@@ -16,7 +16,8 @@ class UsersController < ApplicationController
     end
   end
 
-  def Update
+  def destroy
+  
   end
  
 
