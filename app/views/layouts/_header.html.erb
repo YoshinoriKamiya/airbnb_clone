@@ -7,11 +7,11 @@
             <li class="nav-item active">
                 <input class="form-control mr-sm-2" type="search" placeholder="Where are you going?" aria-label="Search">
             </li>
-        </ul>
             <li class="nav-item">
                 <a class="btn btn-outline-success" href="/rooms/new">Become a host</a>
             </li>
             <% if user_signed_in? %>
+           <li>
                 <li class="nav-item dropdown">
                     <a href="#" class="nav-link dropdown-toggle text-white" data-toggle="dropdown">
                         <%= current_user.name %><b class="caret"></b>
@@ -40,7 +40,10 @@
                     <li class="nav-item ">
                         <%= link_to "Sign up",new_user_registration_path,class:"nav-link text-muted"%>
                     </li>
+            </li>
             <% end %>
+        </ul>
+        </div>
     </div>
 </nav>
            
