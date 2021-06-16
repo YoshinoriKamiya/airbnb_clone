@@ -1,0 +1,55 @@
+ <% provide(:title,'Profile') %>
+ <br>
+<div class="container mt-3">
+    <div class="row mb-3">
+        <div class="col-3">
+            <div class="card mt-4">
+                <%= gravatar_for @user  %>
+                <div>
+                    <div class="card-body float-left">
+                        Facebook 
+                        <span class="float-right"><i class="fa fa-check-circle"></i>
+                        </span>
+                        <br>
+                        Phonenumber
+                        <span class="float-right"><i class="fa fa-times-circle"></i>
+                        </span></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-8">
+            <div class="text-left">
+                <h5><%= @user.name %></h5>
+                <p>Email:<%= @user.email%><p>
+                <p>Contact Number:<%= @user.contact_number%>
+                <h5>Listing<%= "count"%><h5>
+            </div>
+            <div class="card">
+                <div class="card-header">
+                    <%= "picture"%>
+                </div>
+                <div class="card-body">
+                    <div>cost</div>
+                    <div>Review</div>
+                </div>
+            </div>
+            <div class="mt-3">
+                <p><strong>Review From Guest<%= "count"%></strong></p>
+                <hr>
+                <span><%= "gravatar"%>Review</span>
+            </div>
+            <div class="mt-3">
+                <p><strong>Review From Host<%= "count" %></strong></p>
+                <hr>
+                <div>
+                <%= "Review"%>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+  
+ 
+     
+ 

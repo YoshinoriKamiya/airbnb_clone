@@ -15,11 +15,17 @@
                     <div class="mt-5">
                     </div>
                     <br>
-                    <% if notice %>
-                        <p><%= notice %></p>
-                    <% elsif alert %>
-                        <p><%= alert %></p>
-                    <% end %>
+    
+
+                    <% #unless flash.empty? %>
+                    <script type="text/javascript">
+                    toastr.success("hello")
+                    // <% flash.each do |f| %>
+                    // <% type = f[0].to_s %>
+                    // toastr['<%= type %>']('<%= f[1] %>');
+                    // <% end %>
+                    </script>
+                    <% #end %>
                 <%= yield %>
             </div>
         </body>

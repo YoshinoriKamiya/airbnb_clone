@@ -1,45 +1,36 @@
 <div class="container"><br>
-        <div class="text-center">
-            <h2>Sign up</h2><br>
+    <div class="text-center">
+        <h2>Sign up</h2><br>
         <div class="row">
             <div class="col-4 offset-4">
-                    <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-                    <%= render "users/shared/error_messages", resource: resource %>
-                    
-                    <div class="field">
-                        <%= f.text_field :name, autofocus: true, autocomplete: "name",:placeholder =>"Full Name" ,class:"form-control",required: true %>
-                    </div>
-                    <br>
-                    <div class="field">
-                        <%= f.email_field :email, autofocus: true, autocomplete: "email",:placeholder => "Email",class:"form-control"%>
-                    </div>
-                    <div class="field">
-                        <% if @minimum_password_length %>
-                        <% end %><br/>
-                        <%= f.password_field :password ,:placeholder => "Password",class:"form-control"%>
-                    </div>
-                        <div class="field">
-                        <% if @minimum_password_length %>
-                        <% end %><br/>
-                        <%= f.password_field :password_confirmation,  :placeholder => "Password Confirmation",class:"form-control"%>
-                    </div>
-                    <br/>
-                    <div class="actions">
-                        <%= f.submit "Sign up" ,class: "btn btn-block btn-danger"%>
-                    </div>
-                    <br/>
-                    <div class="actions">
-                    <%= f.submit "Sign in with Facebook" ,class: "btn btn-block btn-primary"%>
+                <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+                <%= render "users/shared/error_messages", resource: resource %>
+                
+                <div class="field">
+                    <%= f.text_field :name, autofocus: true, autocomplete: "name",:placeholder =>"Full Name" ,class:"form-control",required: true %>
                 </div>
-                    <% end %>
-                 </div>
+                <br>
+                <div class="field">
+                    <%= f.email_field :email, autofocus: true, autocomplete: "email",:placeholder => "Email",class:"form-control"%>
+                </div>
+                <br>
+                <div class="field">
+                    <%= f.number_field :contact_number, autofocus: true, autocomplete: "email",:placeholder => "Contact Number",class:"form-control"%>
+                </div>
+                <br>
+                <div class="field">
+                    <%= f.password_field :password ,:placeholder => "Password",class:"form-control"%>
+                </div>
+                <br>
+                <div class="field">
+                    <%= f.password_field :password_confirmation,  :placeholder => "Password Confirmation",class:"form-control"%>
+                </div>
+                <br/>
+                <div class="actions">
+                    <%= f.submit "Sign up" ,class: "btn btn-block btn-danger"%>
+                </div>
+                <% end %>
             </div>
-            
-            <br/>
-            <div class="actions">
-            <%= link_to "Sign in with Facebook" ,user_facebook_omniauth_authorize_path,class: "btn btn-block btn-primary"%>
-            </div>
-            <% end %>
         </div>
     </div>
 </div>
