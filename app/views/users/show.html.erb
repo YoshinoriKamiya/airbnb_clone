@@ -8,11 +8,13 @@
                 <div>
                     <div class="card-body float-left">
                         Facebook 
-                        <span class="float-right"><i class="fa fa-check-circle"></i>
+                        <span class="float-right">
+                        <% if @user.provider == 'facebook' %><i class="fa fa-check-circle"></i><% else %><i class="fa fa-times-circle"></i><% end %>
                         </span>
                         <br>
                         Phonenumber
-                        <span class="float-right"><i class="fa fa-times-circle"></i>
+                        <span class="float-right">
+                        <% unless @user.contact_number.nil? %> <i class="fa fa-check-circle"></i><% else %><i class="fa fa-times-circle"></i><% end %>
                         </span></i>
                     </div>
                 </div>

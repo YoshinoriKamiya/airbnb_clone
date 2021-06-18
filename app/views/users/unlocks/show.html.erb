@@ -1,0 +1,51 @@
+ <% provide(:title,'Profile') %>
+ <br>
+<div class="container mt-3">
+    <div class="row mb-3">
+        <div class="col-4">
+            <div class="card mb-3">
+                <div class="text-center">
+                    <div class="card-body">
+                        <div>
+                            <%= "gravatar"%>
+                        </div>
+                        <div>Email Address</div>
+                        <div>Phonenumber</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-8">
+            <div class="card">
+                <div class="card-header">
+                    <div class="text-left">
+                        <h5><%= "user.username"%></h5>
+                        <p>Listing<%= "count"%><p>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <%= "picture"%>
+                </div>
+            </div>
+            <div>
+                <p><strong>Review From Guest<%= "count"%></strong></p>
+                <hr>
+                <%= "gravatar"%>
+                <div>
+                    Review
+                </div>
+            </div>
+            <div>
+                <p><strong>Review From Host</strong></p>
+                <hr>
+                <div>
+                Review
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+  
+ 
+     
+ 

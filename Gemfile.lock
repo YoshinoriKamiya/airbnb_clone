@@ -264,7 +264,6 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  bcrypt (~> 3.1.7quit)
   bootsnap (>= 1.1.0)
   bootstrap (~> 4.4.1)
   byebug

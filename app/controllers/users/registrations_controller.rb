@@ -60,7 +60,6 @@ class Users::RegistrationsController < Devise::RegistrationsController
   #   super(resource)
   # end
 
-  def show
-    user = User.find(params[:id])
-  end
+ 
+
 end
