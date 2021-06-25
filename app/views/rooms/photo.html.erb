@@ -1,0 +1,31 @@
+<%= render 'rooms/listing.side' %>
+<div class="col-9">
+    <div class="card">
+        <div class="card-header">Photo Upload</div>
+            <div class="card-body text-center">
+                <div class="row">
+                    <%= form_for @room, url: room_images_url(@room), method: "post", html: { :multipart => true }, enctype: 'multipart/form-data' do |f| %>
+                            <%= file_field_tag "images[]", type: :file, multiple: true, required: true, accept: "image/jpeg,image/gif,image/png" %>
+                        <div class="row">
+                        <% @images.each do |image| %>
+                            <div class="col col-lg-4 py-2">
+                                <div class="card mt-4">
+                                    <div class="card-img-top-preview"> 
+                                        <%= image_tag image.image, class: "img mw-100" %>
+                                    </div>
+                                    <div class="card-text">
+                                        <%= link_to raw("<i class=' fa fa-trash text-danger'></i>&nbsp;Delete image"), room_image_path(@room, image), method: :delete, class: "ext-danger" %>
+                                    </div>
+                                </div>                            
+                            </div>
+                        <% end %>
+                        </div>
+                        <div class="form-group mt-2">
+                            <%= f.submit "Add Photos", class:"btn btn-dark" %>
+                        </div>
+                    <% end %>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

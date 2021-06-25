@@ -1,0 +1,68 @@
+<br><br>
+<div class="container mt-3">
+    <div class="row">
+        <div class="col-3">
+            <div class="card">
+                <div class="card-body">
+                    <h4>
+                        <div>
+                            <%= link_to "Listing", room_images_path(@room),class:"text-info"%>
+                            <span class="float-right">
+                            <%if @room.home_type.present? %><i class="fa fa-check"></i><% else %>
+                            <%if @room.room_type.present? %><i class="fa fa-check"></i><% else %>
+                            <%if @room.accomodate.present? %><i class="fa fa-check"></i><% else %>
+                            <%if @room.bedroom.present? %><i class="fa fa-check"></i><% else %>
+                            <%if @room.bathroom.present? %><i class="fa fa-check"></i><% else %>
+                            <% end %><% end %><% end %><% end %><% end %>
+                        </div>
+                    </h4>
+                    <h4>
+                        <div>
+                            <%= link_to "Price", price_room_path(@room),class:"text-info"%>
+                            <span class="float-right">
+                            <% if @room.price.present? %><i class="fa fa-check"></i><% else %><% end %>
+                        </div>
+                    </h4>
+                    <h4>
+                        <div>
+                            <%= link_to "Description", description_room_path(@room),class:"text-info"%>
+                            <span class="float-right">
+                            <% if @room.description.present? %><i class="fa fa-check"></i><% else %><% end %>
+                        </div>
+                    </h4>        
+                    <h4>
+                        <div>
+                            <%= link_to "Photos", photo_room_path(@room),class:"text-info"%>
+                            <span class="float-right">
+                            <% if @room.images.first.present? %><i class="fa fa-check"></i><% else %><% end %>
+                        </div>
+                    </h4>
+                    <h4>
+                        <div>
+                            <%= link_to "Amenities", amenities_room_path(@room),class:"text-info"%>
+                            <span class="float-right">
+                            <%if @room.tv.present? %><i class="fa fa-check"></i><% else %>
+                            <%if @room.kitchen.present? %><i class="fa fa-check"></i><% else %>
+                            <%if @room.internet.present? %><i class="fa fa-check"></i><% else %>
+                            <%if @room.heating.present? %><i class="fa fa-check"></i><% else %>
+                            <%if @room.air_conditioner.present? %><i class="fa fa-check"></i><% else %>
+                            <% end %><% end %><% end %><% end %><% end %>
+                        </div>
+                    </h4>
+                    <h4>
+                        <div>
+                        <%= link_to "Location", location_room_path(@room),class:"text-info"%>  
+                         <span class="float-right">
+                         <% if @room.location.present? %><i class="fa fa-check"></i><% else %><% end %>
+                        </div>
+                    </h4>
+                    <hr>
+                    <div class="actions text-center">
+                    <%= form_for(@room) do |f| %>
+                        <%= f.hidden_field :is_active, value:true %>
+                        <%= f.submit "Publish", disabled: !is_ready_to_publish(@room), class: "btn btn-primary" %>
+                    <% end %>
+                </div>
+            </div>
+        </div>
+    </div>

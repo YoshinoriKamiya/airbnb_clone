@@ -1,0 +1,21 @@
+<%= render 'rooms/listing.side' %>
+<div class="col-9">
+    <div class="card">
+        <div class="card-header">
+            <h5>Location</h5>
+        </div>
+        <div class="card-body">
+            <%= form_for(@room) do |f| %>
+                <div class="form-group">
+                    <label for="room_address">Address</label>
+                    <div class="form-group">
+                        <%= f.text_field :location , autofocus: true, autocomplete: "location",:placeholder =>"Where is your address?" ,class:"form-control",required: true %>
+                    </div>
+                </div>
+                <div class="form-group mt-2">
+                    <%= f.submit "Save", class:"btn btn-dark" %>
+                </div>
+            <% end %>
+        </div>
+    </div>
+</div>

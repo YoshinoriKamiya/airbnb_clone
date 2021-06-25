@@ -1,0 +1,41 @@
+<%= render 'rooms/listing.side' %>
+    <div class="col-9">
+        <div class="card">
+            <div class="card-header">Amenities</div>
+                <div class="card-body">
+                    <div class="row">
+                        <%= form_for(@room) do |f| %>
+                            <div class="col">
+                                <div class="form-group">
+                                    <%= f.check_box :tv%>TV
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="form-group">
+                                    <%= f.check_box :kitchen %>kitchen
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="form-group">
+                                    <%= f.check_box :internet %>internet
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="form-group">
+                                    <%= f.check_box :heating %>Heating
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="form-group">
+                                <%= f.check_box :air_conditioner %>Air conditioner
+                                </div>
+                            </div>  
+                            <div>
+                                <%= f.submit "Save", class:"btn btn-dark" %>
+                            </div>      
+                        <% end %>  
+                    </div>
+                </div>
+            </div>                            
+        </div>
+    </div>

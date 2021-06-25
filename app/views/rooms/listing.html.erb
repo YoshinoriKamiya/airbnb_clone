@@ -1,0 +1,78 @@
+ 
+<%= render 'rooms/listing.side' %>
+        <div class="col-9">
+            <div class="card">
+                <div class="card-header">
+                    <h5>Listing</h5>
+                </div>
+                <div class="card-body">
+                    <%= form_for(@room) do |f| %>
+                        <div class="row">
+                            <div class="col-4 select">
+                                <div class="form-group">
+                                    <label for="home_type">Home type</label>
+                                    <%= f.select :home_type, options_for_select([
+                                    ["Select .."],
+                                    ["Apartment"],
+                                    ["House"],
+                                    ["Bed&Breakfast"]]),{}, class: "form-control" %>
+                                </div>
+                            </div>
+
+                            <div class="col-4 select">
+                                <div class="form-group">
+                                    <label for="room_type">Room type</label>
+                                    <%= f.select :room_type, options_for_select([
+                                    ["Select .."],
+                                    ["Entire"],
+                                    ["Private"],
+                                    ["Shared"]]), {}, class: "form-control" %>
+                                </div>
+                            </div>
+
+                            <div class="col-4 select">
+                                <div class="form-group">
+                                    <label for="accomodate">Accomodate</label>
+                                    <%= f.select :accomodate, options_for_select([
+                                    ["Select .."],
+                                    ["1"],
+                                    ["2"],
+                                    ["3"],
+                                    ["4"]]), {}, class: "form-control" %>
+                                    
+                                </div>
+                            </div>
+                            <div class="col-4 select">
+                                <div class="form-group">
+                                    <label for="bedroom">Bedroom</label>
+                                    <%= f.select :bedroom, options_for_select([
+                                    ["Select .."],
+                                    ["1"],
+                                    ["2"],
+                                    ["3"],
+                                    ["4"]]), {}, class: "form-control" %>
+                                </div>
+                            </div>
+
+                            <div class="col-4 select">
+                                <div class="form-group">
+                                    <label for="bathroom">Bathroom</label>
+                                    <%= f.select :bathroom, options_for_select([
+                                    ["Select .."],
+                                    ["1"],
+                                    ["2"],
+                                    ["3"],
+                                    ["4"]]), {}, class: "form-control" %>
+                                </div>
+                            </div>        
+                        </div>
+                        
+                        <div class="form-group mt-2">
+                            <%= f.submit "Save", class:"btn btn-dark" %>
+                        </div>
+                    <% end %>
+                </div>
+            </div>
+        </div>
+    </div>
+                   
