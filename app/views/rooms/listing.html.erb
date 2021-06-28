@@ -11,11 +11,14 @@
                             <div class="col-4 select">
                                 <div class="form-group">
                                     <label for="home_type">Home type</label>
-                                    <%= f.select :home_type, options_for_select([
-                                    ["Select .."],
-                                    ["Apartment"],
-                                    ["House"],
-                                    ["Bed&Breakfast"]]),{}, class: "form-control" %>
+                                 <%= f.select :home_type, options_for_select([
+                                        ["Select..."],
+                                        ["Apartment"],
+                                        ["Resort"],
+                                        ["House"],
+                                        ["Bread & Breakfast"]
+                                    ], selected: f.object.home_type), {}, class: "form-control"
+                                %>
                                 </div>
                             </div>
 
@@ -23,22 +26,26 @@
                                 <div class="form-group">
                                     <label for="room_type">Room type</label>
                                     <%= f.select :room_type, options_for_select([
-                                    ["Select .."],
-                                    ["Entire"],
-                                    ["Private"],
-                                    ["Shared"]]), {}, class: "form-control" %>
+                                        ["Select..."],
+                                        ["Entire"],
+                                        ["Private"],
+                                        ["Shared"],
+                                    ], selected: f.object.room_type), {}, class: "form-control"
+                                %>
                                 </div>
                             </div>
 
                             <div class="col-4 select">
                                 <div class="form-group">
                                     <label for="accomodate">Accomodate</label>
-                                    <%= f.select :accomodate, options_for_select([
-                                    ["Select .."],
-                                    ["1"],
-                                    ["2"],
-                                    ["3"],
-                                    ["4"]]), {}, class: "form-control" %>
+                                    <%= f.select :bedroom, options_for_select([
+                                        ["Select..."],
+                                        ["1"],
+                                        ["2"],
+                                        ["3"],
+                                        ["4"]
+                                    ], selected: f.object.bedroom), {}, class: "form-control"
+                                %>
                                     
                                 </div>
                             </div>
@@ -46,23 +53,27 @@
                                 <div class="form-group">
                                     <label for="bedroom">Bedroom</label>
                                     <%= f.select :bedroom, options_for_select([
-                                    ["Select .."],
-                                    ["1"],
-                                    ["2"],
-                                    ["3"],
-                                    ["4"]]), {}, class: "form-control" %>
+                                        ["Select..."],
+                                        ["1"],
+                                        ["2"],
+                                        ["3"],
+                                        ["4"]
+                                    ], selected: f.object.bedroom), {}, class: "form-control"
+                                %>
                                 </div>
                             </div>
 
                             <div class="col-4 select">
                                 <div class="form-group">
                                     <label for="bathroom">Bathroom</label>
-                                    <%= f.select :bathroom, options_for_select([
-                                    ["Select .."],
-                                    ["1"],
-                                    ["2"],
-                                    ["3"],
-                                    ["4"]]), {}, class: "form-control" %>
+                                     <%= f.select :bathroom, options_for_select([
+                                        ["Select..."],
+                                        ["1"],
+                                        ["2"],
+                                        ["3"],
+                                        ["4"]
+                                    ], selected: f.object.bathroom), {}, class: "form-control"
+                                %>
                                 </div>
                             </div>        
                         </div>
