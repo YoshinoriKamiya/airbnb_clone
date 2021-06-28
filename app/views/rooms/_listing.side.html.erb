@@ -6,7 +6,7 @@
                 <div class="card-body">
                     <h4>
                         <div>
-                            <%= link_to "Listing", room_images_path(@room),class:"text-info"%>
+                            <%= link_to "Listing", listing_room_path(@room),class:"text-info"%>
                             <span class="float-right">
                             <%if @room.home_type.present? %><i class="fa fa-check"></i><% else %>
                             <%if @room.room_type.present? %><i class="fa fa-check"></i><% else %>
