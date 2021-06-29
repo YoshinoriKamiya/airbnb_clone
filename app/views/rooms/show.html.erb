@@ -1,3 +1,4 @@
+<br>
 <div class="container mt-3">
     <div class="row">
         <div class="col-12">
@@ -12,8 +13,8 @@
                     <p><%= @room.location %></p>
                 </div>
                 <div class="col-4 text-center">
-                   
-                    <p></p>
+                   <%= gravatar_for @user %>
+                    <p><%= @user.name %></p>
                 </div>
             </div>
             <hr>
@@ -98,24 +99,69 @@
             </div>
             <hr>
             <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
-            <ol class="carousel-indicators">
-             
-            </ol>
-            <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
-                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                <span class="sr-only">Previous</span>
-            </a>
-            <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
-                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                <span class="sr-only">Next</span>
-            </a>
+                <ol class="carousel-indicators">
+                    <% @images.drop(1).count.times do |image| %>
+                    <li data-target="#carouselExampleIndicators" data-slide-to="#{image}"></li>
+                    <% end %>        
+                </ol>
+                <div class="carousel-inner">
+                    <div class="carousel-item active">
+                        <% @images.first(1).each do |image| %>
+                            <%= attachment_image_tag image, :image, class: "carousel_image"  %>
+                        <% end %>
+                    </div> 
+                    <% @images.drop(1).each do |image| %>
+                        <div class="carousel-item">
+                            <%= attachment_image_tag image, :image, class: "carousel_image" %>
+                        </div>
+                    <% end %>
+                </div>
+                <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Previous</span>
+                </a>
+                <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Next</span>
+                </a>
             </div>
             <div class="row">
                 <div class="col-12">
                     <%= image_tag(@room.images.first.image ,class:'w-100') %>
                 </div>
             </div>
+            <hr>
+            <div class="row mtb-2">
+                <div class="col-12">
+                    <div id="map" style="height: 600px;width: 600px;"></div>
+
+                    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBLlV2LP0idYnVVGFbJPpoGxEISfa4bM6w&callback=initMap"></script>
+
+                    <script type='text/javascript'>
+                    function initMap() {
+                        var location = {lat: Number("<%= @room.latitude %>"), lng: Number("<%= @room.longitude %>")};
+                        var map = new google.maps.Map(document.getElementById('map'),{
+                            center: location,
+                            zoom: 20
+                        });
+                        
+                        var marker = new google.maps.Marker({
+                            position: location,
+                            map: map
+                        });
+
+                        var infoWindow = new google.maps.InfoWindow({
+                            content: '<div id="content"><% if @room.images.present? %><%= image_tag @room.images.first.image, size: "400x200" %><%else%><p>No Image Found</p> <%end%></div>'
+                        });
+
+                        infoWindow.open(map, marker);
+                    }
+                    google.maps.event.addDomListener(window,'load', initMap);
+                    </script>
+                </div>
+            </div>
         </div>
+        <hr>
         <div class="col-4 mt-5">
             <div class="card">
                 <div class="card-header theme-color">

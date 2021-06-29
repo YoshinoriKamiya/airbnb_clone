@@ -36,7 +36,7 @@ class RoomsController < ApplicationController
   end
 
   def show
-    @room = Room.find(params[:id])
+    @user = User.find(@room.user_id)
   end
    
     private
