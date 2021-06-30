@@ -105,7 +105,7 @@
                             <div class="carousel-inner" role="listbox">
                                 <% @carousel.each do |image| %>
                                     <div class="carousel-item <%= image.id == @carousel.first.id ? 'active' : '' %>">
-                                        <%= image_tag image.image, class: "mw-100 d-block gallery h-100" %>
+                                        <%= image_tag image.image, class: "mw-100 d-block gallery" %>
                                     </div>
                                 <% end %>                    
                             </div>
