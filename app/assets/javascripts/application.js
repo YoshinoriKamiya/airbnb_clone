@@ -21,7 +21,12 @@
 //= require_tree .
 $(document).ready(function() {
 
-
+  (function() {
+    let marker = new google.maps.Marker({
+      position: {lat: <%= user.latitude %>, lng: <%= user.longitude %>},
+      map: map,
+    });
+  })(); 
   toastr.options = {
                    "closeButton": false,
                    "debug": false,
