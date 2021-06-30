@@ -37,6 +37,7 @@ class RoomsController < ApplicationController
 
   def show
     @user = User.find(@room.user_id)
+    @carousel = @room.images
   end
    
     private

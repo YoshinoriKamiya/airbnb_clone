@@ -10,6 +10,7 @@ class ImagesController < ApplicationController
     end
   end
 
+  
   def destroy
     @images = Image.find(params[:id])
     @room = Room.find(params[:room_id])
