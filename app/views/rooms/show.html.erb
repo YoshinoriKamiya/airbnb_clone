@@ -170,39 +170,149 @@
                 </div>
             </div>    
             <div class="card-body"> 
-                <div class="row">
-                    <div class="col-6">
-                        <label>Check in</label>
-                            <div class="form-group">
-                                <input type="text" name="start_date" id="start_date" placeholder="Start Date" class="form-control">
+                <%= form_for [@room, @room.bookings.new] do |f| %>
+                    <div class="row">
+                        <div class="col-6">    
+                                <%= f.hidden_field :room_id, value: @room.id %>
+                                <label>Check in</label>
+                                <%= f.text_field :check_in_date, id: "check_in_date", class: "form-control", readonly: true, placeholder: "Check In Date" %>
+                            </div>
+                            <div class="col-6">
+                                <label>Check out</label>
+                                <%= f.text_field :check_out_date, id: "check_out_date", class: "form-control col-lg-10", readonly: true, placeholder: "Check Out Date", disabled: true %>
                             </div>
                         </div>
-                    <div class="col-6">
-                        <label>Check out</label>
-                            <div class="form-group">            
-                                <input type="text" name="end_date" id="end_date" placeholder="End Date" class="form-control">
-                            </div>
                     </div>
-                </div>
-                    <h4 class="text-center unavailable mt-2"><span id="message"></span></h4>
-                    <div id="preview" style ="display: none">
-                    <table class="table">
-                        <tr>
-                            <td class="text-left">Price</td>
-                            <td class="text-right">130</td>
-                        </tr>
-                        <tr>
-                            <td class="text-left">Night(s)</td>
-                            <td class="text-right"><span id="reservation-nights"></span></td>
-                        </tr>
-                        <tr>
-                            <td class="text-left">Total</td>
-                            <td class="text-right">$<span id="reservation-total"></span></td>
-                        </tr>
-                    </table>
-                </div>
-                <input type="submit" name="commit" value="Book now" id="btn-book" class="btn btn-primary mt-3 btn-block" disabled="disabled" data-disable-with="Book now" />
+                        <h4 class="text-center unavailable mt-2"><span id="message"></span></h4>
+                        <div id="preview" style ="display: none">
+                        <table class="table">
+                            <tr>
+                                <td class="text-left">Price</td>
+                                <td class="text-right">$<span id="room_price"><%= @room.price %></span></td>
+                            </tr>
+                            <tr>
+                                <td class="text-left">Night(s)</td>
+                                <td class="text-right">x<span id="nights"></span></td>
+                            </tr>
+                            <tr>
+                                <td class="text-left">Total</td>
+                                <td class="text-right">$<span id="total_price"></span></td>
+                            </tr>
+                        </table>
+                    </div>
+                    <%= f.submit "Book now", class:"btn btn-dark"%>
+                <% end %>
             </div>
         </div>
     </div>    
 </div>
+<script>
+    function checkSchedule(date){
+        schedule = date.getDate() + "-" + (date.getMonth()+1) + "-" + date.getFullYear();
+        return [$.inArray(schedule, unavailableDates) == -1];
+    }
+
+    $(function() {
+        unavailableDates = [];
+
+        $.ajax({
+            url: '<%= check_current_bookings_room_path(@room) %>',
+            dataType: 'json',
+            success: function(data){
+                console.log("Success");
+                $.each(data, function(arrayID, arrayValue) {
+                    for(var i = new Date(arrayValue.check_in_date); i <= new Date(arrayValue.check_out_date); i.setDate(i.getDate()+1)){
+                        unavailableDates.push($.datepicker.formatDate('d-m-yy', i));
+                    }
+                })
+                console.log(unavailableDates)
+                $("#check_in_date").datepicker({
+                    numberOfMonths:1,
+                    dateFormat: 'dd-mm-yy',
+                    minDate: 0,
+                    maxDate: '3m',
+                    beforeShowDay: checkSchedule,
+                    onSelect: function(selectedDate) {
+                        $("#check_out_date").datepicker("option", "minDate", selectedDate);
+                        $('#check_out_date').attr("disabled", false);
+
+                        var check_in = $('#check_in_date').datepicker('getDate');
+                        var check_out = $('#check_out_date').datepicker('getDate');
+                        var nights = (check_out - check_in)/1000/3600/24;
+
+                        var input = {
+                            'check_in_date': check_in,
+                            'check_out_date': check_out
+                        }
+
+                        $.ajax({
+                            url: '<%= review_booking_room_path(@room) %>',
+                            data: input,
+                            success: function(data){
+                                if(data.conflict){
+                                    $('#message').text('Selected Dates are Unavailable');
+                                    $('#preview').hide();
+                                    $('#reserve').attr('disabled', true)
+                                } else {
+                                    $('#message').text('Selected Dates are Available');
+                                    $('#preview').show();
+                                    $('#reserve').attr('disabled', false)
+                                    if(check_in.getTime() == check_out.getTime()){
+                                        nights = 1;
+                                    }
+                                }
+                                var total_price = nights * <%= @room.price %>
+                                $('#nights').text(nights);
+                                $('#total_price').text(total_price);
+                            }
+                        })
+                    }
+                });
+
+                $("#check_out_date").datepicker({
+                    numberOfMonths:1,
+                    dateFormat: 'dd-mm-yy',
+                    minDate: 0,
+                    maxDate: '3m',
+                    beforeShowDay: checkSchedule,
+                    onSelect: function(selectedDate) {
+                        $("#check_in_date").datepicker("option", "maxDate", selectedDate);
+
+                        var check_in = $('#check_in_date').datepicker('getDate');
+                        var check_out = $('#check_out_date').datepicker('getDate');
+                        var nights = (check_out - check_in)/1000/3600/24;
+
+                        var input = {
+                            'check_in_date': check_in,
+                            'check_out_date': check_out
+                        }
+
+                        $.ajax({
+                            url: '<%= review_booking_room_path(@room) %>',
+                            data: input,
+                            success: function(data){
+                                if(data.conflict){
+                                    $('#message').text('Selected Dates are Unavailable');
+                                    $('#preview').hide();
+                                    $('#reserve').attr('disabled', true)
+                                } else {
+                                    $('#message').text('Selected Dates are Available');
+                                    $('#preview').show();
+                                    $('#reserve').attr('disabled', false)
+                                    if(check_in.getTime() == check_out.getTime()){
+                                        nights = 1;
+                                    }
+                                }
+                                var total_price = nights * <%= @room.price %>
+                                $('#nights').text(nights);
+                                $('#total_price').text(total_price);
+                            }
+                        })
+
+
+                    }
+                });
+            }
+        })
+    });
+</script>

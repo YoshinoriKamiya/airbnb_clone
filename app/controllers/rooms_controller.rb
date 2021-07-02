@@ -39,7 +39,25 @@ class RoomsController < ApplicationController
     @user = User.find(@room.user_id)
     @carousel = @room.images
   end
+
+  
    
+  def check_current_bookings
+    today = Date.today
+    booking = @room.bookings.where("check_in_date >= ? OR check_out_date >= ?", today, today)
+
+    render json: booking
+  end
+
+ def review_booking
+    check_in_date = Date.parse(params[:check_in_date])
+    check_out_date = Date.parse(params[:check_out_date])
+
+    result = { conflict: check_conflicts(check_in_date, check_out_date, @room) }
+
+    render json: result
+  end
+
     private
     def room_params
       params.require(:room).permit(:home_type, :room_type, :accomodate, :bedroom, :bathroom,:price,:description,:photo,:kitchen,:tv,:internet,:air_conditioner,:heating,:location,:room_name,:user_id,:is_active) 
@@ -51,5 +69,10 @@ class RoomsController < ApplicationController
       else
         @room = Room.find(params[:id])
       end
+    end
+
+    def check_conflicts(check_in_date, check_out_date, room)
+      check = @room.bookings.where('? < check_in_date AND check_out_date < ?', check_in_date, check_out_date)
+      check.size > 0 ? true : false
     end
 end

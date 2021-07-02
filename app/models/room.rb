@@ -7,6 +7,7 @@ class Room < ApplicationRecord
 
   has_many :images
   has_many :user
+  has_many :bookings
 
   geocoded_by :location
   after_validation :geocode
