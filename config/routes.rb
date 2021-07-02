@@ -9,9 +9,10 @@ Rails.application.routes.draw do
 
   resources :users, only: [:show]
   resources :rooms
-  
+ 
   resources :rooms do
     resources :images, only: [:create, :destroy]
+    resources :bookings
     member do
       get :listing
       get :price
@@ -19,6 +20,8 @@ Rails.application.routes.draw do
       get :photo
       get :amenities
       get :location
+      get :check_current_bookings
+      get :review_booking
     end
   end
 end
